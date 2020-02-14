@@ -1,0 +1,23 @@
+{
+  "name": "github_readme",
+  "version": "1.0.0",
+  "description": "Asks user a set of questions and creates a Github readme file.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shawn220a/github_readme.git"
+  },
+  "author": "Shawn Tschoepe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shawn220a/github_readme/issues"
+  },
+  "homepage": "https://github.com/shawn220a/github_readme#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "inquirer": "^7.0.4"
+  }
+}
