@@ -2,12 +2,26 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const axios = require('axios');
 
+let readme = '';
+let res = '';
+
 inquirer.prompt([
   {
     type: 'input',
     name: 'gitName',
     message: 'What is your GitHub username?'
-  },
+  }
+])
+.then((answers) => {
+
+  axios.get(`https://api.github.com/users/${answers.gitName}`)
+    .then((res) => {
+      res = res.data;
+      return res;
+    })
+})
+.then(function() {
+ inquirer.prompt([
   {
     type: 'input',
     name: 'projectName',
@@ -47,9 +61,9 @@ inquirer.prompt([
     message: 'What does the user need to know about contributing to the repo?'
   }
 ]).then((answers) => {
-  console.log(answers);
 
-  const readme = generateReadme(answers);
+  console.log(res);
+  readme = generateReadme(res, answers);
 
   fs.writeFile('finishedReadme.md', readme, (err) => {
     if (err) {
@@ -58,11 +72,12 @@ inquirer.prompt([
     }
     console.log("Successfully wrote to finishedReadme.md");
   })
-});
+})
+})
 
-function generateReadme(answers) {
+function generateReadme(res, answers) {
   return `# ${answers.projectName}
-  [![GitHub license](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](https://github.com/calvincarter/demo_day_project2)
+  [![GitHub license](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](${res.html_url}/${answers.projectName})
   ​
   ## Description
   ​
@@ -88,7 +103,7 @@ function generateReadme(answers) {
   ​
   \`\`\`
   ${answers.install}
-  \`\`\`​
+  \`\`\`
 
   ## Usage
   ​
@@ -112,9 +127,9 @@ function generateReadme(answers) {
  
   ## Questions
   ​
-  <img src="https://avatars1.githubusercontent.com/u/4831868?v=4" alt="avatar" style="border-radius: 16px" width="30" />
+  <img src="${res.avatar_url}" alt="avatar" style="border-radius: 16px" width="30" />
   ​
-  If you have any questions about the repo, open an issue or contact [${answers.gitName}](https://api.github.com/users/calvincarter).`;
+  If you have any questions about the repo, open an issue or contact [${res.login}](${res.html_url}).`;
 }
 
 
