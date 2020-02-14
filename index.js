@@ -56,9 +56,9 @@ function promptUser() {
   ]);
 }
 
-function generateReadme(response, answers) {
+function generateReadme(response, answers, answersURL) {
   return `# ${answers.projectName}
-  [![GitHub license](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](${response.html_url}/${answers.projectName})
+  [![License](${answersURL})](${response.html_url}/${answers.projectName})
   ​
   ## Description
   ​
@@ -116,10 +116,23 @@ function generateReadme(response, answers) {
 promptUser()
   .then(function(answers) {
 
+    if (answers.license === 'Mozilla') {
+      answersURL = 'https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg'
+    }
+    if (answers.license === 'MIT') {
+      answersURL = 'https://img.shields.io/badge/License-MIT-yellow.svg'
+    }
+    if (answers.license === 'ISC') {
+      answersURL = 'https://img.shields.io/badge/License-ISC-blue.svg'
+    }
+    if (answers.license === 'GPL 3.0') {
+      answersURL = 'https://img.shields.io/badge/License-GPLv3-blue.svg'
+    }
+
     axios.get(`https://api.github.com/users/${answers.gitName}`)
       .then((res) => {
         response = res.data;
-        readme = generateReadme(response, answers);
+        readme = generateReadme(response, answers, answersURL);
         return writeFileSync("finishedReadme.md", readme);
       })
       
