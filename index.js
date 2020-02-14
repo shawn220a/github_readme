@@ -86,8 +86,10 @@ function generateReadme(answers) {
   ​
   To install necessary dependencies, run the following command:
   ​
+  \`\`\`
   ${answers.install}
-  ​
+  \`\`\`​
+
   ## Usage
   ​
   ${answers.usage}
@@ -104,7 +106,9 @@ function generateReadme(answers) {
   ​
   To run tests, run the following command:
 
+  \`\`\`
   ${answers.tests}
+  \`\`\`
  
   ## Questions
   ​
