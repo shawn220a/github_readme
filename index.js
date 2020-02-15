@@ -5,9 +5,6 @@ const axios = require('axios');
 
 const writeFileSync = util.promisify(fs.writeFile);
 
-let response = '';
-let readme = '';
-
 function promptUser() {
   return inquirer.prompt([
     {
@@ -42,6 +39,12 @@ function promptUser() {
       name: 'tests',
       message: 'What command should be run to run tests?',
       default: 'npm test'
+    },
+    {
+      type: 'input',
+      name: 'start',
+      message: 'What command should be run to run the program?',
+      default: 'npm run start'
     },
     {
       type: 'input',
@@ -104,6 +107,14 @@ function generateReadme(response, answers, answersURL) {
 
   \`\`\`
   ${answers.tests}
+  \`\`\`
+
+  ## Start the Program
+  ​
+  To run the program, run the following command:
+
+  \`\`\`
+  ${answers.start}
   \`\`\`
  
   ## Questions
