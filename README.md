@@ -15,3 +15,11 @@ npm i || npm install
 ```
 npm run start || node index.js
 ```
+## Languages Used
+
+* Node.js
+* Javascript
+
+## License
+
+No license required. These are public pages.
