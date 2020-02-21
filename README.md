@@ -4,6 +4,10 @@
 
 This project allows you to use the terminal to ask the user questions about a github repo, and then create a markdown file with it.
 
+## Video of Program
+
+![GIF](https://media.giphy.com/media/Qtj9XQR0Tz9u0SqLvu/giphy.gif)
+
 ## Installing Packages
 
 ```
